@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    `maven-publish`
 }
 
 android {
@@ -29,6 +30,18 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+}
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.yogeshpatilnepra"
+                artifactId = "FancyCustomView"
+                version = "1.0.0"
+            }
+        }
     }
 }
 
